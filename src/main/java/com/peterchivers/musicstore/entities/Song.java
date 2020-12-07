@@ -1,13 +1,25 @@
 package com.peterchivers.musicstore.entities;
 
-public class Song extends BaseEntity {
+import javax.persistence.*;
+import java.util.Objects;
 
+@Entity
+public class Song {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    protected Long id;
     private String name;
     private Integer length;
+
+    @ManyToOne
     private Album album;
 
+    public Song() {
+    }
+
     public Song(Long id, String name, Integer length, Album album) {
-        super(id);
+        this.id = id;
         this.name = name;
         this.length = length;
         this.album = album;
@@ -35,5 +47,36 @@ public class Song extends BaseEntity {
 
     public void setAlbum(Album album) {
         this.album = album;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Song{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", length=" + length +
+                ", album=" + album +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Song song = (Song) o;
+        return Objects.equals(id, song.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

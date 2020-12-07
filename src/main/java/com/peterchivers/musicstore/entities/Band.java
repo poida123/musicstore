@@ -1,18 +1,31 @@
 package com.peterchivers.musicstore.entities;
 
+import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
-public class Band extends BaseEntity {
+@Entity
+public class Band {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    protected Long id;
     private String name;
+
+    @ManyToMany(mappedBy = "bands")
     private Set<Artist> artists;
+
+    @OneToMany
+    @JoinColumn(name = "album_id")
     private Set<Album> albums;
 
-    public Band(Long id, String name, Set<Artist> artists, Set<Album> albums) {
-        super(id);
+    public Band() {
+    }
+
+    public Band(Long id, String name, Set<Artist> artists) {
+        this.id = id;
         this.name = name;
         this.artists = artists;
-        this.albums = albums;
     }
 
     public String getName() {
@@ -37,5 +50,36 @@ public class Band extends BaseEntity {
 
     public void setAlbums(Set<Album> albums) {
         this.albums = albums;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Band{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", artists=" + artists +
+                ", albums=" + albums +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Band band = (Band) o;
+        return Objects.equals(id, band.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
