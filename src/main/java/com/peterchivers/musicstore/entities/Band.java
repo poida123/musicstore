@@ -1,6 +1,7 @@
 package com.peterchivers.musicstore.entities;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -13,19 +14,17 @@ public class Band {
     private String name;
 
     @ManyToMany(mappedBy = "bands")
-    private Set<Artist> artists;
+    private Set<Artist> artists = new HashSet<>();
 
     @OneToMany
-    @JoinColumn(name = "album_id")
-    private Set<Album> albums;
+    @JoinColumn(name = "band_id")
+    private Set<Album> albums = new HashSet<>();
 
     public Band() {
     }
 
-    public Band(Long id, String name, Set<Artist> artists) {
-        this.id = id;
+    public Band(String name) {
         this.name = name;
-        this.artists = artists;
     }
 
     public String getName() {

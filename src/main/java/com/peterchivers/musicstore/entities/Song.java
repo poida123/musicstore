@@ -18,8 +18,7 @@ public class Song {
     public Song() {
     }
 
-    public Song(Long id, String name, Integer length, Album album) {
-        this.id = id;
+    public Song(String name, Integer length, Album album) {
         this.name = name;
         this.length = length;
         this.album = album;

@@ -2,6 +2,7 @@ package com.peterchivers.musicstore.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -15,23 +16,20 @@ public class Album {
     private LocalDate releaseDate;
 
     @OneToMany
-    @JoinColumn(name = "song_id")
-    private Set<Song> songs;
+    @JoinColumn(name = "album_id")
+    private Set<Song> songs = new HashSet<>();
 
     @ManyToMany(mappedBy = "albums")
-    private Set<Genre> genre;
+    private Set<Genre> genres = new HashSet<>();
     @ManyToOne
     private Band band;
 
     public Album() {
     }
 
-    public Album(Long id, String name, LocalDate releaseDate, Band band, Set<Song> songs, Set<Genre> genre) {
-        this.id = id;
+    public Album(String name, LocalDate releaseDate, Band band) {
         this.name = name;
         this.releaseDate = releaseDate;
-        this.songs = songs;
-        this.genre = genre;
         this.band = band;
     }
 
@@ -59,12 +57,12 @@ public class Album {
         this.songs = songs;
     }
 
-    public Set<Genre> getGenre() {
-        return genre;
+    public Set<Genre> getGenres() {
+        return genres;
     }
 
-    public void setGenre(Set<Genre> genre) {
-        this.genre = genre;
+    public void setGenres(Set<Genre> genres) {
+        this.genres = genres;
     }
 
     public Band getBand() {
@@ -90,7 +88,7 @@ public class Album {
                 ", name='" + name + '\'' +
                 ", releaseDate=" + releaseDate +
                 ", songs=" + songs +
-                ", genre=" + genre +
+                ", genre=" + genres +
                 ", band=" + band +
                 '}';
     }

@@ -1,7 +1,9 @@
 package com.peterchivers.musicstore.entities;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -15,20 +17,18 @@ public class Artist {
     @ManyToMany
     @JoinTable(name = "band_artists", joinColumns = @JoinColumn(name = "artist_id"),
             inverseJoinColumns = @JoinColumn(name = "band_id"))
-    private Set<Band> bands;
+    private Set<Band> bands = new HashSet<>();
     private String firstName;
     private String lastName;
-    private Date dob;
+    private LocalDate dob;
 
     public Artist() {
     }
 
-    public Artist(Long id, String firstName, String lastName, Date dob, Set<Band> bands) {
-        this.id = id;
+    public Artist(String firstName, String lastName, LocalDate dob) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dob = dob;
-        this.bands = bands;
     }
 
     public Set<Band> getBands() {
@@ -55,11 +55,11 @@ public class Artist {
         this.lastName = lastName;
     }
 
-    public Date getDob() {
+    public LocalDate getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(LocalDate dob) {
         this.dob = dob;
     }
 

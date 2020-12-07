@@ -2,6 +2,7 @@ package com.peterchivers.musicstore.entities;
 
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -16,15 +17,13 @@ public class Genre {
     @ManyToMany
     @JoinTable(name = "album_genres", joinColumns = @JoinColumn(name = "genre_id"),
     inverseJoinColumns = @JoinColumn(name = "album_id"))
-    private Set<Album> albums;
+    private Set<Album> albums = new HashSet<>();
 
     public Genre() {
     }
 
-    public Genre(Long id, String name, Set<Album> albums) {
-        this.id = id;
+    public Genre(String name) {
         this.name = name;
-        this.albums = albums;
     }
 
     public String getName() {
