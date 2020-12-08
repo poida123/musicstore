@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Music Store Albums</title>
+</head>
+<body>
+<h1>Albums</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Band Name</th>
+            <th>Album Name</th>
+            <th>Release Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="album : ${albumList}">
+            <td th:text="${album.band.name}">Band Name</td>
+            <td th:text="${album.name}">Album Name</td>
+            <td th:text="${#temporals.format(album.releaseDate, 'dd/MM/yyyy')}">Release Date</td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

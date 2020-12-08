@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Music Store Genres</title>
+</head>
+<body>
+<h1>Genres</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="genre : ${genreList}">
+            <td th:text="${genre.name}">Name</td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

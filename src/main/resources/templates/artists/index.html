@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Music Store Artists</title>
+</head>
+<body>
+<h1>Artists</h1>
+<table>
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>DOB</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="artist : ${artistList}">
+            <td th:text="${artist.firstName}">First Name</td>
+            <td th:text="${artist.lastName}">Last Name</td>
+            <td th:text="${#temporals.format(artist.dob, 'dd/MM/yyyy')}">DOB</td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>
